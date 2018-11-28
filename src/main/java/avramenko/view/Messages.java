@@ -1,0 +1,20 @@
+package main.java.avramenko.view;
+
+public enum Messages {
+    CHOOSE,
+    ENTER_LENGTH,
+    ENTER_ID,
+    ENTER_BRAND,
+    ENTER_MODEL,
+    ENTER_YEAR,
+    ENTER_COLOR,
+    ENTER_NUMBER,
+    ENTER_PRICE,
+    ENTER_BRAND_LONG,
+    ENTER_MODEL_LONG,
+    ENTER_YEARS_LONG,
+    ENTER_PRICE_LONG,
+    NO_RESULTS,
+    SOMETHING_WRONG,
+    SUCCESSFUL
+}
