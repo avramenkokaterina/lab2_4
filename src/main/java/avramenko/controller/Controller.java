@@ -1,12 +1,15 @@
-package main.java.avramenko.controller;
+package avramenko.controller;
 
-import main.java.avramenko.model.Car;
-import main.java.avramenko.model.Model;
-import main.java.avramenko.validators.InvalidInputException;
-import main.java.avramenko.validators.Validator;
-import main.java.avramenko.view.Activities;
-import main.java.avramenko.view.Messages;
-import main.java.avramenko.view.View;
+import avramenko.filesWorks.*;
+import avramenko.model.Car;
+import avramenko.model.Model;
+import avramenko.validators.InvalidInputException;
+import avramenko.validators.Validator;
+import avramenko.view.Activities;
+import avramenko.view.Messages;
+import avramenko.view.View;
+
+import java.io.IOException;
 
 public class Controller {
     private Car[] result;
@@ -20,12 +23,15 @@ public class Controller {
     private String carColor;
     private String carNumber;
     private Validator validator;
+    private WorkerWithStringFile workerWithStringFile;
+    private WorkerWithJSONFiles workerWithJSONFiles;
+    private WorkerWithSerialization workerWithSerialization;
 
     public Controller() {
         validator = new Validator();
     }
 
-    public void startWorking() {
+    public void startWorking() throws IOException {
         View view = new View();
         Model model = new Model();
         Activities activities;
@@ -41,6 +47,27 @@ public class Controller {
                     break;
                 case CREATE_CAR_LIST:
                     activities = createCarList(view, model);
+                    break;
+                case SHOW_SAVE_MENU:
+                    activities = showSaveMenu(view);
+                    break;
+                case TXT_FILE_READ:
+                    activities = txtFileRead(view, model);
+                    break;
+                case JSON_FILE_READ:
+                    activities = jsonFileRead(view, model);
+                    break;
+                case SERIALIZATION_FILE_READ:
+                    activities = serializationFileRead(view, model);
+                    break;
+                case TXT_FILE_WRITE:
+                    activities = txtFileWrite(view, model);
+                    break;
+                case JSON_FILE_WRITE:
+                    activities = jsonFileWrite(view, model);
+                    break;
+                case SERIALIZATION_FILE_WRITE:
+                    activities = serializationFileWrite(view, model);
                     break;
                 case SHOW_SUBMENU:
                     activities = showSubMenu(view);
@@ -63,25 +90,37 @@ public class Controller {
         }
     }
 
-    private static Activities convertChoiceToConstant(int choice) {
+    private Activities convertChoiceToConstant(int choice) {
         switch (choice) {
             case 1:
                 return Activities.GENERATE_CAR_LIST;
-            case 2:
-                return Activities.CREATE_CAR_LIST;
-            case 3:
-                return Activities.EXIT;
-            case 4:
-                return Activities.SHOW_SUBMENU;
             case 5:
-                return Activities.GET_BRAND;
+                return Activities.CREATE_CAR_LIST;
+            case 2:
+                return Activities.TXT_FILE_READ;
+            case 3:
+                return Activities.JSON_FILE_READ;
+            case 4:
+                return Activities.SERIALIZATION_FILE_READ;
             case 6:
-                return Activities.GET_MODEL;
+                return Activities.EXIT;
             case 7:
-                return Activities.GET_YEAR;
+                return Activities.TXT_FILE_WRITE;
             case 8:
-                return Activities.SHOW_MAIN_MENU;
+                return Activities.JSON_FILE_WRITE;
             case 9:
+                return Activities.SERIALIZATION_FILE_WRITE;
+            case 10:
+                return Activities.SHOW_SUBMENU;
+            case 11:
+                return Activities.GET_BRAND;
+            case 12:
+                return Activities.GET_MODEL;
+            case 13:
+                return Activities.GET_YEAR;
+            case 14:
+                return Activities.SHOW_MAIN_MENU;
+            case 15:
                 return Activities.EXIT;
         }
         return null;
@@ -107,6 +146,22 @@ public class Controller {
         length = checkLengthInput(view);
         view.printCar(model.createCars(length));
         return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities showSaveMenu(View view) {
+        view.menuSave();
+        choice = view.readNumber();
+        do {
+            try {
+                if (!validator.checkSaveChoice(choice).isEmpty()) {
+                    throw new InvalidInputException(validator.checkSaveChoice(choice));
+                }
+            } catch (InvalidInputException iie) {
+                System.out.println(iie.getMessage());
+                choice = view.readNumber();
+            }
+        } while (!validator.checkSaveChoice(choice).isEmpty());
+        return convertChoiceToConstant(choice + 6);
     }
 
     private Activities createCarList(View view, Model model) {
@@ -142,6 +197,84 @@ public class Controller {
         } else {
             view.printMessage(Messages.SOMETHING_WRONG);
         }
+        return Activities.SHOW_SAVE_MENU;
+    }
+
+    private Activities txtFileRead(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithStringFile = new WorkerWithStringFile();
+        isSuccessful = workerWithStringFile.readFromFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
+        return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities jsonFileRead(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithJSONFiles = new WorkerWithJSONFiles();
+        isSuccessful = workerWithJSONFiles.readFromFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
+        return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities serializationFileRead(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithSerialization = new WorkerWithSerialization();
+        isSuccessful = workerWithSerialization.readFromFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
+        return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities txtFileWrite(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithStringFile = new WorkerWithStringFile();
+        isSuccessful = workerWithStringFile.writeToFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
+        return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities jsonFileWrite(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithJSONFiles = new WorkerWithJSONFiles();
+        isSuccessful = workerWithJSONFiles.writeToFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
+        return Activities.SHOW_SUBMENU;
+    }
+
+    private Activities serializationFileWrite(View view, Model model) throws IOException {
+        boolean isSuccessful = false;
+        workerWithSerialization = new WorkerWithSerialization();
+        isSuccessful = workerWithSerialization.writeToFile(model);
+        if (isSuccessful) {
+            view.printMessage(Messages.SUCCESSFUL);
+            view.printCar(model.getCars());
+        } else {
+            view.printMessage(Messages.SOMETHING_WRONG);
+        }
         return Activities.SHOW_SUBMENU;
     }
 
@@ -158,7 +291,7 @@ public class Controller {
                 choice = view.readNumber();
             }
         } while (!validator.checkSubMenuChoice(choice).isEmpty());
-        return convertChoiceToConstant(choice + 4);
+        return convertChoiceToConstant(choice + 10);
     }
 
     private Activities getListOfCarsBrand(View view, Model model) {

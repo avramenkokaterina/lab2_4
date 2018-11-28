@@ -1,4 +1,4 @@
-package main.java.avramenko.view;
+package avramenko.view;
 
 public enum Messages {
     CHOOSE,

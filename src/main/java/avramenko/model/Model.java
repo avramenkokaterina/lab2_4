@@ -1,4 +1,4 @@
-package main.java.avramenko.model;
+package avramenko.model;
 
 import java.util.Arrays;
 

@@ -1,6 +1,6 @@
-package main.java.avramenko.view;
+package avramenko.view;
 
-import main.java.avramenko.model.Car;
+import avramenko.model.Car;
 
 import java.util.Scanner;
 
@@ -10,8 +10,19 @@ public class View {
 
     public void menu() {
         System.out.println("1. Generate car list");
-        System.out.println("2. Create car list");
-        System.out.println("3. Exit");
+        System.out.println("2. Read car list from .txt file");
+        System.out.println("3. Read car list from JSON file");
+        System.out.println("4. Read car list from serialization file");
+        System.out.println("5. Create car list");
+        System.out.println("6. Exit");
+        printMessage(Messages.CHOOSE);
+    }
+
+    public void menuSave(){
+        System.out.println("1. Save to .txt file.");
+        System.out.println("2. Save to JSON file");
+        System.out.println("3. Save to serialization file.");
+        System.out.println("4. Continue without saving.");
         printMessage(Messages.CHOOSE);
     }
 

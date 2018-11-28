@@ -1,4 +1,4 @@
-package main.java.avramenko.validators;
+package avramenko.validators;
 
 public class InvalidInputException extends Exception{
 

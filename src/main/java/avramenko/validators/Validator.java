@@ -1,11 +1,12 @@
-package main.java.avramenko.validators;
+package avramenko.validators;
 
 public class Validator {
 
     private final static String CAR_NUMBER_REGEXP = "[A-Z]{2}[0-9]{4}[A-Z]{2}";
     private final static String ID_CAR_REGEXP = "\\w{16}";
 
-    private final static String CHOICE_EXCEPTION_MENU = "There is no such menu item. Enter number from 1 to 3.";
+    private final static String CHOICE_EXCEPTION_MENU = "There is no such menu item. Enter number from 1 to 6.";
+    private final static String CHOICE_EXCEPTION_SAVE_MENU = "There is no such menu item. Enter number from 1 to 4.";
     private final static String CHOICE_EXCEPTION_SUBMENU = "There is no such menu item. Enter number from 1 to 5.";
     private final static String MAX_LENGTH_EXCEPTION = "Bad length. Enter length from 1 to 10.";
     private final static String MAX_YEAR_EXCEPTION = "Enter year from 0 to 2018.";
@@ -13,8 +14,15 @@ public class Validator {
     private final static String ID_CAR_EXCEPTION = "Wrong identification number of car. Enter id car in format 16 symbols of letters and numbers.";
 
     public String checkMenuChoice(int number) {
-        if (number < 1 || number > 3) {
+        if (number < 1 || number > 6) {
             return CHOICE_EXCEPTION_MENU;
+        }
+        return "";
+    }
+
+    public String checkSaveChoice(int number) {
+        if (number < 1 || number > 4) {
+            return CHOICE_EXCEPTION_SAVE_MENU;
         }
         return "";
     }

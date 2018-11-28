@@ -1,0 +1,14 @@
+{
+"cars":[
+  {"identificationNumber": "1A2SH7J8K3D4F5Gh", "carBrand": "Lamborghini", "carModel": "Gallardo", "carYear": 2015, "carColor": "Yellow", "carNumber": "BB1234AS", "carPrice": 120000},
+  {"identificationNumber": "A21S3D4FhH75GJ8K", "carBrand": "Lamborghini", "carModel": "Murcielago", "carYear": 2013, "carColor": "Black", "carNumber": "CC1234AS", "carPrice": 265000},
+  {"identificationNumber": "1A2S3D4F5GhH7J8K", "carBrand": "Aston Martin", "carModel":  "DB8", "carYear": 2009, "carColor": "Black", "carNumber": "AA1234AS", "carPrice": 90000},
+  {"identificationNumber": "S3D1A25GhHJ8K74F", "carBrand": "Mercedes-Benz", "carModel": "SL 500", "carYear": 2010, "carColor": "Silver", "carNumber": "DD1234AS", "carPrice": 75000},
+  {"identificationNumber": "4F5GhH71A2S3DJ8K", "carBrand": "Mercedes-Benz", "carModel": "SLR", "carYear": 2013, "carColor": "Black", "carNumber": "EE1234AS", "carPrice": 300000},
+  {"identificationNumber": "D41A2GhS3F5H7J8K", "carBrand": "Porsche", "carModel": "911 Turbo S", "carYear": 2016, "carColor": "Black", "carNumber": "FF1234AS", "carPrice": 105000},
+  {"identificationNumber": "D41A2hH7S3F5GJ8K", "carBrand": "Porsche", "carModel": "Carrera GT", "carYear": 2016, "carColor": "White", "carNumber": "GG1234AS", "carPrice": 280000},
+  {"identificationNumber": "1D4GA2S3hH7F5J8K", "carBrand": "Porsche", "carModel": "Cayman S", "carYear": 2010, "carColor": "Black", "carNumber": "HH1234AS", "carPrice": 160000},
+  {"identificationNumber": "5GhH7J8K1A2S3D4F", "carBrand": "BMW", "carModel": "M3 GTR", "carYear": 2012, "carColor": "White", "carNumber": "II1234AS", "carPrice": 150000},
+  {"identificationNumber": "J8K1A3D4F5G2ShH7", "carBrand": "Mitsubishi", "carModel": "Lancer", "carYear": 2014, "carColor": "Black", "carNumber": "JJ1234AS", "carPrice": 85000}
+]
+}
