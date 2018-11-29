@@ -204,39 +204,32 @@ public class Controller {
         boolean isSuccessful = false;
         workerWithStringFile = new WorkerWithStringFile();
         isSuccessful = workerWithStringFile.readFromFile(model);
-        if (isSuccessful) {
-            view.printMessage(Messages.SUCCESSFUL);
-            view.printCar(model.getCars());
-        } else {
-            view.printMessage(Messages.SOMETHING_WRONG);
-        }
-        return Activities.SHOW_SUBMENU;
+        return isSuccessfulChecker(model, view, isSuccessful);
     }
 
     private Activities jsonFileRead(View view, Model model) throws IOException {
         boolean isSuccessful = false;
         workerWithJSONFiles = new WorkerWithJSONFiles();
         isSuccessful = workerWithJSONFiles.readFromFile(model);
-        if (isSuccessful) {
-            view.printMessage(Messages.SUCCESSFUL);
-            view.printCar(model.getCars());
-        } else {
-            view.printMessage(Messages.SOMETHING_WRONG);
-        }
-        return Activities.SHOW_SUBMENU;
+        return isSuccessfulChecker(model, view, isSuccessful);
     }
 
     private Activities serializationFileRead(View view, Model model) throws IOException {
         boolean isSuccessful = false;
         workerWithSerialization = new WorkerWithSerialization();
         isSuccessful = workerWithSerialization.readFromFile(model);
+        return isSuccessfulChecker(model, view, isSuccessful);
+    }
+
+    private Activities isSuccessfulChecker (Model model, View view, boolean isSuccessful){
         if (isSuccessful) {
             view.printMessage(Messages.SUCCESSFUL);
             view.printCar(model.getCars());
+            return Activities.SHOW_SUBMENU;
         } else {
             view.printMessage(Messages.SOMETHING_WRONG);
+            return Activities.SHOW_MAIN_MENU;
         }
-        return Activities.SHOW_SUBMENU;
     }
 
     private Activities txtFileWrite(View view, Model model) throws IOException {

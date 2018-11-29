@@ -97,6 +97,12 @@ public class Model {
         }
     }
 
+    public void resetCars() {
+        this.cars = new Car[1];
+        this.currentLength=0;
+        length = 0;
+    }
+
     public Car[] createCars(int N) {
         Car[] cars = new Car[10];
         cars[0] = new Car("1A2S3D4F5GhH7J8K", "Aston Martin", "DB8", 2009, "Black", "AA1234AS", 90000);
