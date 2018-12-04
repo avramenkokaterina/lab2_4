@@ -6,7 +6,7 @@ import avramenko.model.Model;
 import java.io.*;
 
 public class WorkerWithSerialization implements WorkerWithFiles {
-    public static final String FILE_NAME = "D:\\My Documents\\универ\\3 курс\\Java\\labs\\lab2_2\\src\\main\\java\\avramenko\\data\\dataSerialization.ser";
+    public static final String FILE_NAME = "D:\\My Documents\\универ\\3 курс\\Java\\labs\\lab2_4\\src\\main\\java\\avramenko\\data\\dataSerialization.ser";
 
     @Override
     public boolean readFromFile(Model model) throws IOException {

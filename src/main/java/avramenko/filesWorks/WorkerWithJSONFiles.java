@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class WorkerWithJSONFiles implements WorkerWithFiles {
 
-    public static final String FILE_NAME = "D:\\My Documents\\универ\\3 курс\\Java\\labs\\lab2_2\\src\\main\\java\\avramenko\\data\\dataJSON.json";
+    public static final String FILE_NAME = "D:\\My Documents\\универ\\3 курс\\Java\\labs\\lab2_4\\src\\main\\java\\avramenko\\data\\dataJSON.json";
     @Override
     public boolean readFromFile(Model model) throws IOException {
         BufferedReader bufferedReader = null;
